@@ -1,0 +1,99 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+
+body {
+  width: 90%;
+  margin: 0 auto;
+  font-family: Georgia, Times, "Times New Roman", serif;
+  font-size: 16px;
+}
+
+h1 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 1em;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
+section {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+box {
+  background-color: #eeeeee;
+  width: 31%;
+  border: 1px solid black;
+  margin-top: 20px;
+}
+
+li {
+  display: inline;
+  text-decoration: none;
+}
+
+img {
+  border-radius: 50%;
+  border: 1px solid black;
+  width: 100px;
+}
+
+.teacher {
+ padding: 10px;
+ display: flex;
+ align-items: center;
+}
+
+.teacher-image {
+  padding-right: 20px;
+  align-items: center;
+}
+
+.teacher-content {
+  align-items: center;
+}
+
+.second-row {
+  display: flex;
+  justify-content: flex-start;
+  text-align: center;
+  border-top: 1px solid black;
+}
+
+.course {
+  width: 50%;
+  padding: 10px;
+}
+
+.rating {
+  width: 50%;
+  border-left: 1px solid black;
+  padding: 10px;
+}
