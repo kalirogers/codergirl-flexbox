@@ -22,7 +22,7 @@ time, mark, audio, video {
 
 body {
   width: 90%;
-  margin: 0 auto;
+  margin: 20px auto;
   font-family: Georgia, Times, "Times New Roman", serif;
   font-size: 16px;
 }
@@ -39,19 +39,22 @@ h2 {
 header {
   display: flex;
   justify-content: space-between;
+	border-bottom: 2px solid black;
+	padding: 10px;
 }
 
 section {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
+	margin-top: 20px;
 }
 
 box {
   background-color: #eeeeee;
-  width: 31%;
+  width: 30%;
   border: 1px solid black;
-  margin-top: 20px;
+  margin: 10px;
 }
 
 li {
@@ -96,4 +99,34 @@ img {
   width: 50%;
   border-left: 1px solid black;
   padding: 10px;
+}
+
+/*Student Page Styles */
+.student {
+	text-align: center;
+	padding: 10px;
+}
+
+.student-info h2 {
+	text-align: right;
+}
+
+.student-info h3 {
+	text-align: left;
+}
+
+/* Course styles */
+
+.courses {
+	display:flex;
+	padding: 20px;
+}
+
+.course-name {
+	width: 30%;
+	border-right: 1px solid black;
+}
+
+.course-info {
+	margin-left: 20px;
 }
