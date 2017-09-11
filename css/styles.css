@@ -21,10 +21,21 @@ time, mark, audio, video {
 
 
 body {
-  width: 90%;
-  margin: 20px auto;
   font-family: Georgia, Times, "Times New Roman", serif;
   font-size: 16px;
+	background-image: url(../images/clouds.jpg);
+}
+
+header {
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: 30px;
+}
+
+.container {
+	display: flex;
+	justify-content: space-between;
+	width: 90%;
+	margin: 0 auto;
 }
 
 h1 {
@@ -36,11 +47,19 @@ h2 {
   font-size: 1em;
 }
 
-header {
-  display: flex;
-  justify-content: space-between;
-	border-bottom: 2px solid black;
-	padding: 10px;
+.title {
+	color: white;
+}
+
+nav a {
+	color: white;
+	text-decoration: none;
+	margin-left: 10px;
+	text-transform: uppercase;
+}
+
+nav a:hover {
+	border-bottom: 1px solid yellow;
 }
 
 section {
@@ -51,8 +70,6 @@ section {
 }
 
 box {
-  background-color: #eeeeee;
-  width: 30%;
   border: 1px solid black;
   margin: 10px;
 }
@@ -72,6 +89,7 @@ img {
  padding: 10px;
  display: flex;
  align-items: center;
+ background-color: rgba(255, 255, 255, 0.6);
 }
 
 .teacher-image {
@@ -88,6 +106,9 @@ img {
   justify-content: flex-start;
   text-align: center;
   border-top: 1px solid black;
+	background-color: rgba(0, 0, 0, 0.8);
+	color: white;
+	padding: 20px;
 }
 
 .course {
@@ -101,25 +122,41 @@ img {
   padding: 10px;
 }
 
+
 /*Student Page Styles */
 .student {
 	text-align: center;
 	padding: 10px;
+	background-color: rgba(255, 255, 255, 0.6);
 }
 
-.student-info h2 {
+.student-info {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.info-label {
 	text-align: right;
+	font-weight: bold;
+	width: 45%;
+	padding-right: 10px;
 }
 
-.student-info h3 {
+.info {
+	width: 50%;
+}
+
+.left-align {
 	text-align: left;
 }
+
 
 /* Course styles */
 
 .courses {
 	display:flex;
 	padding: 20px;
+	background-color: rgba(255, 255, 255, 0.6);
 }
 
 .course-name {
@@ -129,4 +166,32 @@ img {
 
 .course-info {
 	margin-left: 20px;
+}
+
+@media screen and (max-width: 1015px) {
+	.title {
+		width: 40%;
+	}
+
+	h1 {
+		font-size: 1em;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	.container {
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	.title {
+		width: 100%;
+		padding-bottom: 20px;
+	}
+
+	box {
+		width: 80%;
+	}
+
+
 }
