@@ -72,6 +72,7 @@ section {
 box {
   border: 1px solid black;
   margin: 10px;
+	flex-basis: 30%;
 }
 
 li {
@@ -111,8 +112,8 @@ img {
 	padding: 20px;
 }
 
-.course {
-  width: 50%;
+.courses {
+  width: 40%;
   padding: 10px;
 }
 
@@ -138,7 +139,7 @@ img {
 .info-label {
 	text-align: right;
 	font-weight: bold;
-	width: 45%;
+	flex-basis: 30%;
 	padding-right: 10px;
 }
 
@@ -169,6 +170,10 @@ img {
 }
 
 @media screen and (max-width: 1015px) {
+ box {
+	 flex-basis: 40%;
+ }
+
 	.title {
 		width: 40%;
 	}
@@ -190,7 +195,7 @@ img {
 	}
 
 	box {
-		width: 80%;
+		flex-basis: 80%;
 	}
 
 
