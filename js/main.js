@@ -1,56 +1,81 @@
-//console.log("This file is linked!");
+/* ---------------TEACHERs ---------------*/
 
-/* ---------------TEACHERS ---------------*/
+var teacher = {
+  name: "Professor McGonagall",
+  department: "Tranfiguration",
+  ratings: [3.4, 5.0, 4.2],
 
-/*variables*/
+  addTeacherRating: function(rate) {
+    this.ratings.push(rate);
+  },
 
-var teacher = "Professor McGonagall";
-var title = "Tranfiguration";
-var rating = [3.4, 5.0, 4.2];
-
-var avgRating = (3.4 + 5.0 + 4.2)/3;
-var rdAvgRating = avgRating.toFixed(2);
-
-var rateArray = [1.5, 2.5, 3.5, 4.5, 7.0];
-
-/*functions*/
-
-function getRatingAvg(rates) {
-  var total = 0;
-  console.log(rates.length);
-  for(i=0; i < rates.length; i++) {
-    total = total + rates[i];
+  getRatingAvg: function() {
+    var total = 0;
+    //console.log(this.ratings.length);
+    for(i=0; i < this.ratings.length; i++) {
+      total = total + this.ratings[i];
+      //console.log(total);
+    }
+  //console.log(total/this.ratings.length);
+  return total/this.ratings.length;
   }
-console.log(total/rates.length);
-return total/rates.length;
 }
 
-function addTeacherRating(rateArray, newRate) {
-  rateArray.push(newRate);
-  console.log(rateArray.length);
-  return rateArray;
-}
+//var avgRating = (3.4 + 5.0 + 4.2)/3;
+//var rdAvgRating = avgRating.toFixed(2);
+//var rateArray = [1.5, 2.5, 3.5, 4.5, 7.0];
 
 /*instructions*/
-console.log("Teacher: " + teacher + "\n"+ "Department: " + title + "\n" + "Rating: " + rating);
+//console.log("Teacher: " + teacher + "\n"+ "Department: " + title + "\n" + "Rating: " + rating);
+//console.log("Average Rating: " + rdAvgRating);
 
-console.log("Average Rating: " + rdAvgRating);
+var newRate = prompt("We would like for you to review. Please enter a rating between 0.0-5.0");
+var newRateNum = parseInt(newRate);
 
-
-/*var newRate = prompt("We would like for you to review. Please enter a rating between 0.0-5.0");
-console.log(newRate);
-
-while (newRate !== null) {
-  if(newRate <= 5.0) {
-    addTeacherRating(rateArray, newRate);
-    alert("Thanks for your review! " + teacher + " average is now " + getRatingAvg(rateArray).toFixed(2));
-    console.log(newRate);
-    newRate = null;
+while (newRateNum !== null)
+ {
+  if(newRateNum <= 5.0) {
+    teacher.addTeacherRating(newRateNum);
+    alert("Thanks for your review! " + teacher.name + " average is now " + teacher.getRatingAvg().toFixed(2));
+    newRateNum = null;
 }
  else {
-   newRate = prompt("Pleaes try again. Please enter a Please enter a rating between 0.0-5.0");
+   newRateNum = prompt("Pleaes try again. Please enter a Please enter a rating between 0.0-5.0");
  }
-};*/
+};
+
+/* ---------------COURSES ---------------*/
+var course = {
+  name: "Transfiguration 101",
+  department: "Transfiguration",
+  teacher: "Professor McGonagall",
+  semester: 1
+}
+
+/* uses string for teacher
+var allCourses =
+[
+  {name: "Transfiguration 101", department: "Transfiguration", teacher: "Professor McGonagall", sememster: 1},
+  {name: "Potions 101", department: "Potions", teacher: "Professor Slughorn", semester: 2},
+  {name: "Defense Against the Dark Arts 101", department: "Dark Arts", teacher: "Professor Snape", semember: 1},
+  {name: "Charms 101", department: "Charms", teacher: "Professor Flitwick", semester: 2},
+  {name: "Astronomy", department: "Astronomy", teacher: "Professor Sinistra", sememster: 2},
+  {name: "Herbology 101", department: "Herbology", teacher: "Professor Sprout", sememster: 1},
+  {name: "Transfiguration 102", department: "Transfiguration", teacher: "Professor McGonagall", sememster: 2},
+];*/
+
+var allCourses =
+[
+  {name: "Transfiguration 101", department: "Transfiguration", teacher: teacher, sememster: 1},
+  {name: "Potions 101", department: "Potions", teacher: teacher, semester: 2},
+  {name: "Defense Against the Dark Arts 101", department: "Dark Arts", teacher: teacher, semember: 1},
+  {name: "Charms 101", department: "Charms", teacher: teacher, semester: 2},
+  {name: "Astronomy", department: "Astronomy", teacher: teacher, sememster: 2},
+  {name: "Herbology 101", department: "Herbology", teacher: teacher, sememster: 1},
+  {name: "Transfiguration 102", department: "Transfiguration", teacher: teacher, sememster: 2},
+];
+
+console.log(allCourses[0].teacher.name);
 
 /* ---------------STUDENTS ---------------*/
 /*declarations*/
@@ -65,27 +90,22 @@ console.log(
   "Name: " + studName + "\n"+ "Major: " + studMajor + "\n" + "Email: " + studEmail + "\nGPA: " + studGpa + "\nCourses: " + studCourses
 );
 
-var allCourses =
-[
-  ["Transfiguration 101", "Transfiguration"],
-  ["Potions 101", "Potions"],
-  ["Defense Against the Dark Arts", "Dark Arts"],
-  ["Transfiguration 102", "Transfiguration"]
-];
+
 
 function filterDepartment(courseArray, department) {
   var newCourseArray = [];
   for(var i=0; i<courseArray.length; i++){
 
-      var course = courseArray[i];
-      //console.log(course[1]);
+      var course = courseArray[i].department;
+      console.log(course);
       //console.log(department);
-        if(course[1] == department){
-          newCourseArray.push(course[0]);
+        if(course == department){
+          newCourseArray.push(courseArray[i].name);
       }
     };
   return newCourseArray;
 };
+
 var newArray = filterDepartment(allCourses, "Transfiguration");
 console.log(newArray);
 
@@ -117,7 +137,7 @@ var gradDate = function(month, year){
 var classLevel = function (month, year) {
   console.log(currentYear);
   var className = "";
-  if(month === "december"){ //if december
+  if(month === "december" || month === "may"){ //if december
     if(currentMonth>4){ //if month
       var yearNum = year - currentYear;
       console.log(yearNum);
@@ -153,44 +173,7 @@ var classLevel = function (month, year) {
         className = "You are too young to be in high school or college!"
       }
     }// end else if month
-  }// end if december
-
-  else if(month === "may"){ //if else may
-    if(currentMonth<6){
-      var yearNum = year - currentYear;
-      if(yearNum == 0 || yearNum == 4){
-        className="Senior";
-      }
-      else if(yearNum == 1 || yearNum == 5){
-        className = "Junior";
-      }
-      else if(yearNum == 2 || yearNum == 6) {
-        className = "Sophmore";
-      }
-      else if(yearNum == 3  || yearNum == 7 ) {
-        className = "Freshman";
-      }
-    } //end if month
-    else if(currentMonth > 4){
-      var yearNum = (year-1) - currentYear;
-      console.log(yearNum);
-      if(yearNum == 0 || yearNum == 4){
-        className="Senior";
-      }
-      else if(yearNum == 1 || yearNum == 5){
-        className = "Junior";
-      }
-      else if(yearNum == 2 || yearNum == 6) {
-        className = "Sophmore";
-      }
-      else if(yearNum == 3  || yearNum == 7 ) {
-        className = "Freshman";
-      }
-      else {
-        className = "You are too young to be in high school or college!"
-      }
-    } //else if
-  }
+  }// end if dec or may
   else {
     prompt("Please choose either may or december for graduation month");
   } //end else
