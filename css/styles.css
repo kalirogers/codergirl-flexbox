@@ -45,6 +45,12 @@ h1 {
 
 h2 {
   font-size: 1em;
+	font-weight: bold;
+}
+
+strong {
+  font-size: 1em;
+	font-weight: bold;
 }
 
 .title {
@@ -161,12 +167,50 @@ img {
 }
 
 .course-name {
-	width: 30%;
+	width: 38%;
 	border-right: 1px solid black;
 }
 
 .course-info {
 	margin-left: 20px;
+}
+
+#course-filter {
+    border-bottom: 1px solid white;
+    justify-content: left;
+    margin: 0 17%;
+    padding: 2% 0;
+}
+
+#course-filter h2 {
+	color: white;
+	flex-basis: 100%;
+	margin-bottom: 10px;
+	font-size: 1.2em;
+}
+
+#course-filter select {
+	padding:10px;
+}
+
+.department-drop {
+	margin-right: 15px;
+}
+
+.semester-drop {
+	margin-right: 15px;
+}
+
+button {
+	color: white;
+  background-color: black;
+  border: none;
+  padding: 0 30px;
+  border-radius: 5px;
+}
+
+button:hover {
+	background-color:rgba(0, 0, 0, 0.5);
 }
 
 @media screen and (max-width: 1015px) {
