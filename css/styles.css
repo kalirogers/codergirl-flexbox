@@ -123,10 +123,21 @@ img {
   padding: 10px;
 }
 
+.course {
+	width: 70%;
+}
+
 .rating {
-  width: 50%;
+  width: 30%;
   border-left: 1px solid black;
   padding: 10px;
+}
+
+.newRating {
+	background-color: white;
+	height: 50px;
+	margin: 0;
+	padding: 20px;
 }
 
 

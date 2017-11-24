@@ -1,10 +1,12 @@
 
 $(document).ready(function(){
 
-function Teacher (name, department, ratings) {
+function Teacher (name, department, ratings, imgId, classes) {
   this.name = name;
   this.department = department;
   this.ratings = ratings;
+  this.imageId = imgId;
+  this.classes = classes;
 }
 
 Teacher.prototype = {
@@ -20,17 +22,17 @@ Teacher.prototype = {
       //console.log(total);
     }
   //console.log(total/this.ratings.length);
-  return total/this.ratings.length;
+  return (total/this.ratings.length).toFixed(2);
   },
 
   getRating: function() {
     var newRate = prompt("We would like for you to review " + this.name +". Please enter a rating between 0.0-5.0");
-    var newRateNum = parseInt(newRate);
-
+    var newRateNum = parseFloat(newRate);
+    console.log("not in while loop" + newRateNum);
     while (newRateNum !== null) {
         if(newRateNum <= 5.0) {
           this.addTeacherRating(newRateNum);
-          alert("Thanks for your review! " + this.name + " average is now " + this.getRatingAvg().toFixed(2));
+          alert("Thanks for your review! " + this.name + " average is now " + this.getRatingAvg());
           return newRateNum;
           newRateNum = null;
         }
@@ -42,14 +44,114 @@ Teacher.prototype = {
   }
 }; //close to Teacher prototype
 
-//new instances of teachers
-var McGonagall = new Teacher ("Minerva McGonagall", "Transfiguration", [5.0, 4.3, 4.0]);
-var Dumbledore = new Teacher ("Albus Dumbledore", "Headmaster", [5.0, 4.5, 2.0]);
-var Hagrid = new Teacher ("Rubeus Hagrid", "Care of Magical Creatures", [ 4.2, 5.0, 3.0]);
 
-//console.log (McGonagall.name + "\n" + McGonagall.department + "\nAvg. Rating: " + McGonagall.getRatingAvg() + "\nAdding Rating: " + McGonagall.getRating() + "\nNew Avg. Rating: " + McGonagall.getRatingAvg());
+//new instances of courses
+var trans101 = new Course ("Transfiguration 101", "Transfiguration", "Minerva McGonagall", "one");
+var potion101 = new Course ("Potions 101", "Potions", "Severus Snape",  "two");
+var defense101 = new Course ("Defense Against the Dark Arts 101", "Dark Arts", "Remus Lupin" , "one");
+var charms101 = new Course ("Charms 101", "Charms", "Filius Flitwick", "two");
+var astronomy101 = new Course ("Astronomy", "Astronomy", "Aurora Sinistra", "two");
+var herb101 = new Course ("Herbology 101", "Herbology", "Pomona Sprout", "two");
+var trans102 = new Course ("Transfiguration 102", "Transfiguration", "Minerva McGonagall", "two");
+var care101 = new Course("Care of Magical Creatives 101", "Care of Magical Creatures", "Rubeus Hagrid", "one")
+var care102 = new Course("Care of Magical Creatives 102", "Care of Magical Creatures", "Rubeus Hagrid", "two")
+//this is the array of all the courses available
+var allCourses = [trans101, potion101, defense101, charms101, astronomy101, herb101, trans102];
+
+//this calls the funciton and places the boxes on the page.
+updateCourseArray(allCourses);
+
+//new instances of teachers
+var McGonagall = new Teacher ("Minerva McGonagall", "Transfiguration", [5.0, 4.3, 4.0], "mcgonagall", [trans101, trans102]);
+var Dumbledore = new Teacher ("Albus Dumbledore", "Headmaster", [5.0, 4.5, 2.0], "dumbledore", []);
+var Hagrid = new Teacher ("Rubeus Hagrid", "Care of Magical Creatures", [ 4.2, 5.0, 3.0], "hagrid", [care101, care102]);
+var Lupin = new Teacher ("Remus Lupin", "Defense Against the Dark Arts", [3.5, 5.0, 2.8], "lupin", [defense101]);
+var Snape = new Teacher ("Severus Snape", "Potions", [2.5, 3.5, 2.8], "snape", [potion101]);
+var Flitwick = new Teacher ("Filius Flitwick", "Charms", [5.0, 4.0, 4.8], "flitwick", [charms101]);
+var Sinistra = new Teacher ("Aurora Sinistra", "Astronomy", [3.0, 4.0, 5.0], "sinistra", [astronomy101]);
+var Sprout = new Teacher ("Pomona Sprout","Herbology", [4.0, 4.5, 5.0], "sprout", [herb101]);
+
+//console.log (McGonagall.class1 + "\n" + McGonagall.class2 + "\nAvg. Rating: " + McGonagall.getRatingAvg() + "\nAdding Rating: " + McGonagall.getRating() + "\nNew Avg. Rating: " + McGonagall.getRatingAvg());
 //console.log (Dumbledore.name + "\n" + Dumbledore.department + "\nAvg. Rating: " + Dumbledore.getRatingAvg() + "\nAdding Rating: " + Dumbledore.getRating() + "\nNew Avg. Rating: " + Dumbledore.getRatingAvg());
 //console.log (Hagrid.name + "\n" + Hagrid.department + "\nAvg. Rating: " + Hagrid.getRatingAvg() + "\nAdding Rating: " + Hagrid.getRating() + "\nNew Avg. Rating: " + Hagrid.getRatingAvg());
+//var courseTitles = Snape.classes.map(function(course)){
+  //console.log()
+//console.log(Snape.classes);
+//console.log(McGonagall.classes);
+//var classTitle = getTitle(McGonagall.classes);
+
+var allTeachers = [McGonagall, Hagrid, Lupin, Snape, Flitwick, Sinistra, Sprout];
+
+
+
+function updateTeacherArray(teacherArray, courseArray) {
+  for(var i=0; i<teacherArray.length; i++) {
+    var teacherId = 'teacher' + i;
+    $("#teachers").append("<box id=" + teacherId + "></box>");
+    $("#teachers").find("#" + teacherId).append("<div class='teacher'></div>");
+    $("#teachers").find("#" + teacherId).find(".teacher").append("<div class='teacher-image'><img src='images/" + teacherArray[i].imageId +".jpg' /></div>")
+    $("#teachers").find("#" + teacherId).find(".teacher").append("<div class='teacher-content'><h1>" + teacherArray[i].name + "</h1><h2>" + teacherArray[i].department + "</h2></div>");
+    console.log(teacherArray[i].classes);
+    var courseTitles = getTitle(teacherArray[i].classes).join('<br />');
+    //courseTitles.join(', ');
+    //courseTitle = getTitle(allCourses);
+    //console.log("inside updateTeacher function" + courseTitle);
+    $("#teachers").find("#" + teacherId).append("<div class='second-row'><div class='course'><h2>Courses</h2>" + courseTitles + "</div></div>");
+    var avgRating = teacherArray[i].getRatingAvg(teacherArray[i].ratings);
+    console.log(avgRating);
+    $("#teachers").find("#" + teacherId).find(".second-row").append("<div class='rating'><h2>Rating</h2><h3>" + avgRating + "</h3></div>")
+
+  };
+}
+
+function listTeacherInfo(teacherArray){
+  for(var i=0; i<teacherArray.length; i++) {
+    var teacherId = 'teacher' + i;
+    console.log(teacherId);
+    $("#teachers").find(teacherId).addClass("poop");
+    //$("box " + teacherId).on('click', function() {
+    //  $(teacherId).find(".teacher-content h2").css({"color": "purple"});
+    //})
+  }
+}
+
+
+function getTitle(classArray) {
+  var classTitleArray = []
+  for(var i = 0; i < classArray.length; i++){
+    //console.log(classArray[i].title);
+    classTitleArray.push(classArray[i].title);
+  }
+  console.log(classTitleArray);
+  return classTitleArray;
+}
+
+//this function opens the new rating form and adds new rating to teacher
+function getNewRating(teacherArray){
+    $('#teacher0 h1').on('mouseover', function() {
+      $('#teacher0').css({"color": "red"});
+    });
+    $('#teacher0 h1').on('click', function() {
+      //$("body").find("#newRating").addClass("newRating");
+      $('#teacher0').css({"color": "black"});
+      var teacherName = $("#teacher0 h1").text();
+      console.log(teacherName);
+      for(var i=0; i<teacherArray.length; i++) {
+        if(teacherName == teacherArray[i].name){
+          console.log(teacherArray[i].ratings);
+          var updatedRating = teacherArray[i].getRating();
+          var updatedAvg = teacherArray[i].getRatingAvg(updatedRating);
+          console.log(updatedRating);
+          console.log(updatedAvg);
+          $("#teacher0").find(".rating h3").text(updatedAvg);
+        }
+      }
+  });
+}
+updateTeacherArray(allTeachers, allCourses);
+getNewRating(allTeachers);
+//listTeacherInfo(allTeachers);
+
 
 
 /* ---------------COURSES ---------------*/
@@ -60,22 +162,49 @@ function Course (title, department, teacher, semester) {
   this.semester = semester;
 };
 
-function filterDepartment(courseArray, department) {
+function filterDepartment(courseArray, department, sem) {
   var newCourseArray = [];
+  //console.log(courseArray);
+  //console.log("dept " + department);
+  //console.log("sem " + sem);
   for(var i=0; i<courseArray.length; i++){
-      var course = courseArray[i].department;
-      if(course == department){
-          //newCourseArray.push(courseArray[i].title);
-          newCourseArray.push(courseArray[i]);
+      var courseDept = courseArray[i].department;
+      var availSemester = courseArray[i].semester;
+      console.log("in for loop: course " + courseDept);
+      console.log("in for loop: avail " + availSemester);
+      //console.log(newCourseArray);
+      if(department == courseDept && sem == availSemester) {
+          console.log(department);
+          console.log(courseDept);
+          //console.log("true");
+        console.log("true");
+        newCourseArray.push(courseArray[i]);
+        console.log(newCourseArray);
+        //return courseArray[i];
+      //alert("in if statment and it is true")
+          //newCourseArray.push(courseArray[i]);
+          //console.log("It was true");
       }
-    };
-  return newCourseArray;
+      //else {
+        //console.log("false");
+        //return newCourseArray;
+        //alert("The requested class is not available in semester " + sem)
+      //}
+  }
+  if (newCourseArray.length == 0){
+    console.log("no information");
+    alert("There are no courses available in " + department + " in semester " + sem);
+    return newCourseArray;
+  }
+  else {
+    console.log("else statement outside of loop");
+    return newCourseArray;
+}
 };
-
-
+//this function uses a loop to get the information
 function updateCourseArray(courseArray) {
   for(var i=0; i<courseArray.length; i++) {
-    console.log(courseArray[i].teacher);
+    //console.log(courseArray[i].teacher);
     //$("#test").append("<div>Hello</div");
     var courseId = 'course' + i;
     $("#courses").append("<box id=" + courseId + ' class="courses"></box>');
@@ -84,34 +213,20 @@ function updateCourseArray(courseArray) {
   };
 }
 
-
-
-var trans101 = new Course ("Transfiguration 101", "Transfiguration", McGonagall.name, 1);
-var potion101 = new Course ("Potions 101", "Potions", "Professor Slughorn",  2);
-var defense101 = new Course ("Defense Against the Dark Arts 101", "Dark Arts", "Professor Snape", 1);
-var charms101 = new Course ("Charms 101", "Charms", "Professor Flitwick", 2);
-var astronomy101 = new Course ("Astronomy", "Astronomy", "Professor Sinistra", 2);
-var herb101 = new Course ("Herbology 101", "Herbology", "Professor Sprout", 1);
-var trans102 = new Course ("Transfiguration 102", "Transfiguration", McGonagall.name, 2);
-
-var allCourses = [trans101, potion101, defense101, charms101, astronomy101, herb101, trans102];
-
-var newArray = filterDepartment(allCourses, "Charms");
-//console.log(newArray);
-//console.log(potion101);
-
-//updateCourseArray(allCourses);
-
 $('#filter-button').on('click', function(){
   $('#courses').empty();
   var departVal = $('.department-drop').val();
   var semesterVal = $('.semester-drop').val();
-      //console.log(departVal);
-      //console.log(semesterVal);
-      var oneDepartment = filterDepartment(allCourses, departVal);
-      //console.log(oneDepartment);
-      updateCourseArray(oneDepartment);
+    //console.log("inside event handler: department " + departVal);
+    //console.log("inside event handler: semester " + semesterVal);
+  var oneDepartment = filterDepartment(allCourses, departVal, semesterVal);
+    //console.log(oneDepartment);
+  updateCourseArray(oneDepartment);
 });
+
+
+
+
 /* ---------------STUDENTS ---------------*/
 
 function Student(name, major, email, avgGpa, courses){
@@ -241,8 +356,9 @@ function welcomeStudentsByGraduatingClass(month, year) {
   else{
     prompt("Please start over.");
   }
-};
+}
 
+});
 //welcomeStudentsByGraduatingClass(gradMonth, gradYear);
 
 /* uses string for teacher
@@ -290,4 +406,3 @@ var studCourses = "Defense 101";*/
 console.log(
   "Name: " + studName + "\n"+ "Major: " + studMajor + "\n" + "Email: " + studEmail + "\nGPA: " + studGpa + "\nCourses: " + studCourses
 );*/
-});
