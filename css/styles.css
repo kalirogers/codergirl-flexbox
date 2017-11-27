@@ -118,6 +118,10 @@ img {
 	padding: 20px;
 }
 
+.second-row h2 {
+    color: #ffdc78;
+}
+
 .courses {
   width: 40%;
   padding: 10px;
@@ -166,6 +170,31 @@ img {
 
 .left-align {
 	text-align: left;
+}
+
+#newStudent {
+    width: 90%;
+    margin: auto;
+    text-align: right;
+    padding-top: 20px;
+    padding-right: 80px;
+}
+
+#newStudentForm {
+		display: none;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+#newStudentForm input {
+	margin-right: 10px;
+}
+
+.newStudentButton {
+	color: #ffdc78;
+padding: 10px;
+display: inline-block;
 }
 
 

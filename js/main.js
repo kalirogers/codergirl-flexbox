@@ -1,6 +1,8 @@
 
 $(document).ready(function(){
 
+/*----------------TEACHERS------------------------------------*/
+// teacher object
 function Teacher (name, department, ratings, imgId, classes) {
   this.name = name;
   this.department = department;
@@ -8,7 +10,7 @@ function Teacher (name, department, ratings, imgId, classes) {
   this.imageId = imgId;
   this.classes = classes;
 }
-
+//Teacher protype
 Teacher.prototype = {
   addTeacherRating: function(rate) {
     this.ratings.push(rate);
@@ -71,19 +73,9 @@ var Flitwick = new Teacher ("Filius Flitwick", "Charms", [5.0, 4.0, 4.8], "flitw
 var Sinistra = new Teacher ("Aurora Sinistra", "Astronomy", [3.0, 4.0, 5.0], "sinistra", [astronomy101]);
 var Sprout = new Teacher ("Pomona Sprout","Herbology", [4.0, 4.5, 5.0], "sprout", [herb101]);
 
-//console.log (McGonagall.class1 + "\n" + McGonagall.class2 + "\nAvg. Rating: " + McGonagall.getRatingAvg() + "\nAdding Rating: " + McGonagall.getRating() + "\nNew Avg. Rating: " + McGonagall.getRatingAvg());
-//console.log (Dumbledore.name + "\n" + Dumbledore.department + "\nAvg. Rating: " + Dumbledore.getRatingAvg() + "\nAdding Rating: " + Dumbledore.getRating() + "\nNew Avg. Rating: " + Dumbledore.getRatingAvg());
-//console.log (Hagrid.name + "\n" + Hagrid.department + "\nAvg. Rating: " + Hagrid.getRatingAvg() + "\nAdding Rating: " + Hagrid.getRating() + "\nNew Avg. Rating: " + Hagrid.getRatingAvg());
-//var courseTitles = Snape.classes.map(function(course)){
-  //console.log()
-//console.log(Snape.classes);
-//console.log(McGonagall.classes);
-//var classTitle = getTitle(McGonagall.classes);
-
 var allTeachers = [McGonagall, Hagrid, Lupin, Snape, Flitwick, Sinistra, Sprout];
 
-
-
+//dynmically creates the teachers profile boxes on index.html page
 function updateTeacherArray(teacherArray, courseArray) {
   for(var i=0; i<teacherArray.length; i++) {
     var teacherId = 'teacher' + i;
@@ -91,28 +83,14 @@ function updateTeacherArray(teacherArray, courseArray) {
     $("#teachers").find("#" + teacherId).append("<div class='teacher'></div>");
     $("#teachers").find("#" + teacherId).find(".teacher").append("<div class='teacher-image'><img src='images/" + teacherArray[i].imageId +".jpg' /></div>")
     $("#teachers").find("#" + teacherId).find(".teacher").append("<div class='teacher-content'><h1>" + teacherArray[i].name + "</h1><h2>" + teacherArray[i].department + "</h2></div>");
-    console.log(teacherArray[i].classes);
+    //console.log(teacherArray[i].classes);
     var courseTitles = getTitle(teacherArray[i].classes).join('<br />');
-    //courseTitles.join(', ');
-    //courseTitle = getTitle(allCourses);
-    //console.log("inside updateTeacher function" + courseTitle);
+
     $("#teachers").find("#" + teacherId).append("<div class='second-row'><div class='course'><h2>Courses</h2>" + courseTitles + "</div></div>");
     var avgRating = teacherArray[i].getRatingAvg(teacherArray[i].ratings);
-    console.log(avgRating);
-    $("#teachers").find("#" + teacherId).find(".second-row").append("<div class='rating'><h2>Rating</h2><h3>" + avgRating + "</h3></div>")
-
+    //console.log(avgRating);
+    $("#teachers").find("#" + teacherId).find(".second-row").append("<div class='rating'><h2>Rating</h2><h3>" + avgRating + "</h3></div>");
   };
-}
-
-function listTeacherInfo(teacherArray){
-  for(var i=0; i<teacherArray.length; i++) {
-    var teacherId = 'teacher' + i;
-    console.log(teacherId);
-    $("#teachers").find(teacherId).addClass("poop");
-    //$("box " + teacherId).on('click', function() {
-    //  $(teacherId).find(".teacher-content h2").css({"color": "purple"});
-    //})
-  }
 }
 
 
@@ -128,31 +106,36 @@ function getTitle(classArray) {
 
 //this function opens the new rating form and adds new rating to teacher
 function getNewRating(teacherArray){
-    $('#teacher0 h1').on('mouseover', function() {
-      $('#teacher0').css({"color": "red"});
-    });
-    $('#teacher0 h1').on('click', function() {
-      //$("body").find("#newRating").addClass("newRating");
-      $('#teacher0').css({"color": "black"});
-      var teacherName = $("#teacher0 h1").text();
+  $('#teachers box')
+    .on('mouseover', function() {
+      var boxId = $(this).attr("id");
+      console.log(boxId);
+      $('#' + boxId).css({"color": "#ffdc78"});
+    })
+    .on('click', function(){
+      var boxId = $(this).attr("id");
+      console.log(boxId);
+    //$("body").find("#newRating").addClass("newRating");
+      var teacherName = $("#" + boxId + " h1").text();
       console.log(teacherName);
       for(var i=0; i<teacherArray.length; i++) {
         if(teacherName == teacherArray[i].name){
-          console.log(teacherArray[i].ratings);
+          //console.log(teacherArray[i].ratings);
           var updatedRating = teacherArray[i].getRating();
           var updatedAvg = teacherArray[i].getRatingAvg(updatedRating);
           console.log(updatedRating);
           console.log(updatedAvg);
-          $("#teacher0").find(".rating h3").text(updatedAvg);
+          $("#" + boxId).find(".rating h3").text(updatedAvg);
+          }
         }
-      }
-  });
+      })
+      .on('mouseout', function() {
+        var boxId = $(this).attr("id");
+        $('#' + boxId).css({"color": "black"});
+      });
 }
 updateTeacherArray(allTeachers, allCourses);
 getNewRating(allTeachers);
-//listTeacherInfo(allTeachers);
-
-
 
 /* ---------------COURSES ---------------*/
 function Course (title, department, teacher, semester) {
@@ -201,11 +184,9 @@ function filterDepartment(courseArray, department, sem) {
     return newCourseArray;
 }
 };
-//this function uses a loop to get the information
+//this function uses a loop to get the course information from the course object
 function updateCourseArray(courseArray) {
   for(var i=0; i<courseArray.length; i++) {
-    //console.log(courseArray[i].teacher);
-    //$("#test").append("<div>Hello</div");
     var courseId = 'course' + i;
     $("#courses").append("<box id=" + courseId + ' class="courses"></box>');
     $("#courses").find("#" + courseId).append("<div class='course-name'><h2>" + courseArray[i].department + "</h2><p>" + courseArray[i].title + "</p></div>");
@@ -217,15 +198,9 @@ $('#filter-button').on('click', function(){
   $('#courses').empty();
   var departVal = $('.department-drop').val();
   var semesterVal = $('.semester-drop').val();
-    //console.log("inside event handler: department " + departVal);
-    //console.log("inside event handler: semester " + semesterVal);
   var oneDepartment = filterDepartment(allCourses, departVal, semesterVal);
-    //console.log(oneDepartment);
   updateCourseArray(oneDepartment);
 });
-
-
-
 
 /* ---------------STUDENTS ---------------*/
 
@@ -251,12 +226,12 @@ Student.prototype = {
         this.courses.splice(i, 1);
       }
     }
-    console.log(this.courses);
+    //console.log(this.courses);
   },
 
   changeMajor: function(newMajor){
     this.major = newMajor;
-    console.log(this.major);
+    //console.log(this.major);
   }
 
 }
@@ -265,6 +240,57 @@ var potter = new Student("Harry Potter", "Defense Against the Dark Arts", "harry
 var granger = new Student("Hermione Granger", "Charms", "hermione@hogwarts.com", 3.7, ["Charms 101", "Tranfiguration 101", "Potions 101"]);
 var weasley = new Student("Ron Weasley", "Defense Against the Dark Arts", "ron@hogwarts.com", 3.7, ["Care of Magical Creatures", "Tranfiguration 101", "Potions 101"]);
 
+var allStudents = [potter, granger, weasley];
+
+function updateStudents(studentArray) {
+  for(var i = 0; i <studentArray.length; i++) {
+    var studentId = 'student' + i;
+    console.log(studentId);
+      $("#students").append("<box id=" + studentId + "></box>");
+      $("#students").find("#" + studentId).append("<div class='student'></div>");
+      //$("#students").find("#" + studentId).find(".student").append("<div class='student-image'><img src='images/' /></div>");
+      $("#students").find("#" + studentId).find(".student").append("<div class='student-name'><h1>" + studentArray[i].name + "</h1><h2>" + studentArray[i].major + "</h2></div>");
+      var coursesList = studentArray[i].courses.join(", ");
+      $("#students").find("#" + studentId)
+      .append(
+        "<div class='second-row left-align'>" +
+        "<div class='student-info'>" +
+        "<div class='info-label'>Email:</div>" +
+        "<div class='info'>" + studentArray[i].email + "</div>" +
+        "<div class='info-label'>GPA:</div>" +
+        "<div class='info'>" + studentArray[i].avgGpa + "</div>" +
+        "<div class='info-label'>Courses:</div>" +
+        "<div class='info'>" + coursesList + "</div>" +
+        "</div></div>")
+  }
+}
+
+function addNewStudent() {
+  $("#newStudent").on("click", "button", function(){
+    $("#newStudentForm").slideDown();
+    $(".newStudentButton").css({"display": "none"});
+    console.log("open form");
+  });
+  $("#newStudentForm").on("submit", function(){
+    var newStudentInfo = [];
+    var studentName = $("#newStudentName").val();
+    newStudentInfo.push(studentName);
+    console.log(newStudentInfo);
+    var studentMajor = $("#newStudentMajor").val();
+    newStudentInfo.push(studentMajor);
+    console.log(newStudentInfo);
+    var studentEmail = $("#newStudentEmail").val();
+    newStudentInfo.push(studentEmail);
+    console.log(newStudentInfo);
+    console.log("Student name is: " + studentName + studentMajor + studentEmail);
+    alert("this is a new array:" + newStudentInfo);
+    var test = updateStudents(newStudentInfo);
+    console.log("this is a test");
+  });
+
+}
+updateStudents(allStudents);
+addNewStudent();
 console.log("Adding course: Defense 102\n" + "To Student's Courses: " + potter.name + "\nNow they are taking....\n" + potter.addCourse("Defense 102"));
 
 //var gradYear = prompt("What is your expected graduation year?");

@@ -7,6 +7,7 @@
   <meta teacher="description" content="Hogwarts">
   <meta teacher="author" content="Kali Rogers">
   <link rel="stylesheet" href="css/styles.css">
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
   <script src="js/main.js"></script>
 </head>
 
@@ -25,9 +26,18 @@
       </nav>
     </div>
   </header>
-
+  <div id="newStudent">
+      <button class="newStudentButton">Add New Student</button>
+      <form id="newStudentForm" method="get" action="">
+        Name: <input id="newStudentName" type="text" name="name">
+        Major: <input id="newStudentMajor" type="text" name="major">
+        Email: <input id="newStudentEmail" type="text" name="email">
+        GPA: <input id="newStudentGpa" type="text" name="gpa">
+        <input type="submit" value="Create Student">
+      </form>
+  </div>
   <div class="container">
-  <section>
+  <section id="students">
     <box>
       <div class="student">
         <div class="student-image">
