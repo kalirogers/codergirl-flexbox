@@ -261,7 +261,8 @@ function updateStudents(studentArray) {
         "<div class='info'>" + studentArray[i].avgGpa + "</div>" +
         "<div class='info-label'>Courses:</div>" +
         "<div class='info'>" + coursesList + "</div>" +
-        "</div></div>")
+        "</div></div>"
+      );
   }
 }
 
@@ -274,18 +275,20 @@ function addNewStudent() {
   $("#newStudentForm").on("submit", function(){
     var newStudentInfo = [];
     var studentName = $("#newStudentName").val();
-    newStudentInfo.push(studentName);
-    console.log(newStudentInfo);
     var studentMajor = $("#newStudentMajor").val();
-    newStudentInfo.push(studentMajor);
-    console.log(newStudentInfo);
     var studentEmail = $("#newStudentEmail").val();
+    var studentGpa = $("#newStudentEmail").val();
+
+    newStudentInfo.push(studentName);
+
+    newStudentInfo.push(studentMajor);
+
     newStudentInfo.push(studentEmail);
-    console.log(newStudentInfo);
-    console.log("Student name is: " + studentName + studentMajor + studentEmail);
+    //console.log(newStudentInfo);
+    //console.log("Student name is: " + studentName + studentMajor + studentEmail);
     alert("this is a new array:" + newStudentInfo);
     var test = updateStudents(newStudentInfo);
-    console.log("this is a test");
+    //console.log("this is a test");
   });
 
 }
